@@ -1,3 +1,4 @@
+###
 rm(list=ls())
 options(digits=3, width=65)
 
@@ -6,14 +7,15 @@ Data <- read.table("mrrtst.dat", header=FALSE)
 head(Data)
 colnames(Data) <- c("number","animal","sire","dam","cgroup","subject","weight","age")
 dim(Data)
+##### ==> from : https://github.com/Rostamabd/Random-Regression-Analysis/tree/master
 
-#### Unique ages (control variable for RR)
+#### Unique ages (control variable for RR) 
 Age <- sort(unique(Data[,8]))
 
 ### Standardized time values (-1,1)
 w <- -1 + 2 * ((Age - min(Age)) / (max(Age) - min(Age)))
 
-### Compute Legendre polynomials (order 0-2, i.e. 3 coefficients for quadratic)
+### Compute Legendre polynomials (order 0-2, i.e. 3 coefficients for quadratic) 
 source("legendre_Coeff.R")  # Ensure Legdre(p) returns at least 3 values (order 0,1,2)
 
 #### Phi matrix (Legendre basis evaluated at standardized ages)
