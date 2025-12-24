@@ -1,0 +1,58 @@
+COM  Example 3 from DFREML (MRR)
+
+# select a univariate random regression analysis
+ANAL RR
+
+# specify the pedigree file 
+PEDS ../mrrped.dat
+
+# specify the data file and its columns
+DATA ../mrrtst.dat
+  number
+  animal
+  sire 
+  dam
+  cgroup 444
+  subject 999
+  weight
+  age 99
+END
+
+# specify the model
+MODEL
+# .. fit cgroup as `non-function' fixed effect 
+  FIX cgroup
+# fit a mean trajectory as fixed effect
+  COV age(3,leg)
+# tell WOMBAT what the control variable for random regression is
+  RRC age
+# specify additive genetic effects: model as quadratic Legendre polynomial
+  RAN animal(3,leg)  nrm 
+# ditto for non-additive genetic effects due to the animal
+  RAN subject(3,leg) 
+# specify the trait to be analysed
+  trait weight 
+END MOD
+
+# give starting values for covariances: upper triangle!
+VAR animal 3  
+   4500 80  10 
+    300 10 
+    100 
+VAR subject 3 
+   1500   10   10  
+   100    10   
+   50   
+# fit heterogeneous error variances with 6 classes
+VAR residual 1 HET 6
+  19 30   800
+  31 42  1000
+  43 54  1400
+  55 66  1300
+  67 78  1200 
+  79 999 1000
+
+SPECIAL
+# force correlations amongst ALL ages to be written out
+  RRCORR-ALL
+END
