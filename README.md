@@ -9,6 +9,7 @@ A quadratic Legendre polynomial (order 2 → 3 coefficients) is fitted for the a
 Heterogeneous residual variances and other effects are modeled as shown in the original wombat.par file.
 
 The script computes the predicted breeding value trajectory for each animal across all unique ages present in the data and then calculates a total (summed) breeding value — a common summary statistic used in post-processing of random regression models when a single overall BV is desired.
+
 Requirements
 
 R installed.
